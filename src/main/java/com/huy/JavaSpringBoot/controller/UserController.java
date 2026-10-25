@@ -1,6 +1,8 @@
 package com.huy.JavaSpringBoot.controller;
 
 import com.huy.JavaSpringBoot.dto.request.UserRequestDTO;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
     @PostMapping("/")
-    public String addUser(@RequestBody UserRequestDTO userDTO) {
+    public String addUser(@Valid @RequestBody UserRequestDTO userDTO) {
         return "User added";
     }
 
@@ -26,7 +28,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable int userId) {
+    public String deleteUser(@Min(1) @PathVariable int userId) {
         System.out.println("Request delete user, userId: " + userId);
         return "User Deleted";
     }
